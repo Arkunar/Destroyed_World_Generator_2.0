@@ -152,11 +152,11 @@
         
         <!-- 1. ПАНЕЛЬ УПРАВЛЕНИЯ (Inputs) -->
         <aside id="control-panel">
-            <h3>[--- СИСТЕМНЫЙ ВЕКТОР ---]</h3>
+            <h3>[-- СИСТЕМНЫЙ ВЕКТОР --]</h3>
 
             <label for="seed-input">Инициализация/Начальный Фокус:</label>
             <select id="seed-input">
-                <option value="default">-- Выберите фокус (по умолчанию) --</option>
+                <option value="default">Выберите фокус (по умолчанию)</option>
                 <!-- Варианты должны быть добавлены в data.js -->
                 <option value="archaic_mystery">Древняя Тайна (Лавкрафт)</option>
                 <option value="temporal_decay">Временной Распад</option>
@@ -165,11 +165,12 @@
 				<option value="time_entropy_loop">Петля Деградации Времени и Данных</option>
             </select>
 
-            <label for="intensity-slider">Интенсивность Хаоса (Уровень Сдвига):</label>
+            <label for="intensity-slider">Интенсивность Хаоса</label>
+			<label for="intensity-slider">(Уровень Сдвига):</label>
             <!-- Range Slider: от 1 до 10. Управляет весом выборки и статусом опасностности -->
             <input type="range" id="intensity-slider" min="1" max="10" value="6"> 
 
-            <button id="generate-button">>> ЗАПУСТИТЬ ГЕНЕРАЦИЮ ОСКОЛКА <<</button>
+            <button id="generate-button">>>ЗАПУСТИТЬ ГЕНЕРАЦИЮ<< ОСКОЛКА</button>
         </aside>
 
         <!-- 2. ОБЛАСТЬ ВЫВОДА (Output) -->
