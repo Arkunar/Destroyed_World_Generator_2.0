@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив Осколков: Генератор Реальности</title>
+    
+    <!-- --- Стили CSS (Встроенные) --- -->
+    <style>
+        /* Переменные и общие настройки */
+        :root {
+            --color-primary: #00ff99; /* Неоновый циан/зеленый */
+            --color-background: #0a0a12; /* Глубокий темный фон */
+            --color-text: #c4caff; /* Бледно-голубой текст */
+        }
+
+        /* ================== АНИМАЦИЯ ДРАМЫ (ОБЯЗАТЕЛЬНО) ================== */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+            100% { box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); transform: scale(1.01); }
+        }
+
+        /* --- Структурирование интерфейса --- */
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed rgba(0, 255, 153, 0.3);
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            color: var(--color-primary);
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+        }
+        /* ================== КОНТЕНТОВЫЕ БЛОКИ (UI Elements) ================== */
+
+        /* Главный контейнер (Разделение на Панель Управления и Вывод) */
+        .main-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 30px;
+        }
+
+        /* Панель управления (Sidebar) */
+        #control-panel {
+            flex: 1; 
+            min-width: 250px;
+            background-color: rgba(0, 0, 0, 0.3); 
+            padding: 20px;
+            border: 1px solid var(--color-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.2); /* Эффект сканирования */
+        }
+
+        /* Область вывода (Output Area) */
+        #output-area {
+            flex: 3; 
+            min-width: 600px;
+        }
+
+        /* Улучшенная стилизация для элементов управления */
+        label, select, input[type="range"], button {
+            display: block;
+            margin-bottom: 15px;
+            font-family: var(--font-mono);
+        }
+        select, input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color: #0a1020; 
+            border: 1px solid var(--color-primary);
+            color: var(--color-text);
+            box-sizing: border-box;
+        }
+
+        /* Кнопки */
+        #generate-button {
+            background-color: var(--color-primary);
+            color: var(--color-background); 
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1em;
+            text-transform: uppercase;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 8px rgba(0, 255, 153, 0.6);
+        }
+
+        #generate-button:hover {
+            background-color: #00e08c;
+            box-shadow: 0 0 20px var(--color-primary);
+        }
+
+        /* Область вывода текста */
+        #shard-output {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border: 2px dashed var(--color-text);
+            min-height: 400px;
+        }
+
+        /* Специальные классы для драматического отображения */
+        .shard-title {
+            font-size: 1.8em;
+            color: #ff3b6e; /* Красный акцент (Тревога) */
+            margin-bottom: 20px;
+            display: block;
+            border-bottom: 1px solid var(--color-primary);
+            padding-bottom: 5px;
+        }
+
+        .shift-alert {
+            color: #ff3b6e;
+            font-weight: bold;
+        }
+        
+        /* Оформление предупреждений/последствий */
+        #shard-output div[style*="border: solid red"] {
+            animation: pulse 1s infinite alternate; /* Применяем пульсацию при критическом хаосе */
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>// ARCANA SYSTEM V.3.2</h1>
+        <h2>Генератор Осколков Памяти (Reality Shard Generator)</h2>
+        <p style="color: #999;">Проект для RPG. Симуляция метафизического разлома.</p>
+    </header>
+
+    <!-- ======================= ОСНОВНАЯ СТРУКТУРА ИНТЕРФЕЙСА ======================= -->
+    <div class="main-container">
+        
+        <!-- 1. ПАНЕЛЬ УПРАВЛЕНИЯ (Inputs) -->
+        <aside id="control-panel">
+            <h3>[--- СИСТЕМНЫЙ ВЕКТОР ---]</h3>
+
+            <label for="seed-input">Инициализация/Начальный Фокус:</label>
+            <select id="seed-input">
+                <option value="default">-- Выберите фокус (по умолчанию) --</option>
+                <!-- Варианты должны быть добавлены в data.js -->
+                <option value="archaic_mystery">Древняя Тайна (Лавкрафт)</option>
+                <option value="temporal_decay">Временной Распад</option>
+                <option value="energetic_surge">Энергетический Всплеск</option>
+				<option value="zone_memory">Контур Искаженного Воспоминания</option>
+				<option value="time_entropy_loop">Петля Деградации Времени и Данных</option>
+            </select>
+
+            <label for="intensity-slider">Интенсивность Хаоса (Уровень Сдвига):</label>
+            <!-- Range Slider: от 1 до 10. Управляет весом выборки и статусом опасностности -->
+            <input type="range" id="intensity-slider" min="1" max="10" value="6"> 
+
+            <button id="generate-button">>> ЗАПУСТИТЬ ГЕНЕРАЦИЮ ОСКОЛКА <<</button>
+        </aside>
+
+        <!-- 2. ОБЛАСТЬ ВЫВОДА (Output) -->
+        <section id="output-area">
+            <h2>[=== АНАЛИЗ СРЕДЫ И КАРТИРОВАНИЕ ===]</h2>
+            
+            <!-- Контейнер для всего сгенерированного контента -->
+            <div id="shard-output">
+                <p style="color: #666;">Нажмите кнопку "ЗАПУСТИТЬ ГЕНЕРАЦИЮ ОСКОЛКА", чтобы активировать генератор. Система ожидает ввода параметров и расчетов...</p>
+                <!-- Элементы, которые будут заполнены JS -->
+                <h3 class="shard-title" id="shard-name">-- ОЖИДАНИЕ ИНИЦИАЛИЗАЦИИ --</h3> 
+
+                <div id="components-log">
+                    <!-- Сюда попадут все сгенерированные слои: Ландшафт, Фауна, Артефакты и Предупреждение -->
+                </div>
+
+            </div >
+        </section>
+    </div >
+
+    <!-- ============================================================ -->
+    <!-- !!! ПОРЯДОК ЗАГРУЗКИ СКРИПТОВ (Critical: MUST BE THIS ORDER) !!! -->
+    <!-- 1. Загружаем модули данных. Они должны быть в отдельной папке data/ -->
+    <script type="module" src="./data/materials.js"></script>
+    <script type="module" src="./data/lifeforms.js"></script>
+    <script type="module" src="./data/law_physics.js"></script>
+    <!-- 2. Загружаем Сборщик данных (Data Loader), который собирает все модули в KNOWLEDGE_BASE -->
+    <script type="module" src="./data/loader.js"></script>
+    
+    <!-- 3. Логика генератора: Он использует глобальную переменную window.KNOWLEDGE_BASE, созданную loader.js -->
+    <script src="./generator.js"></script>
+
+    <!-- 4. Обработчик Событий: Привязываем клик к кнопке и вызываем функцию generateRealityShard() -->
+    <script>
+        document.getElementById('generate-button').addEventListener('click', function() {
+            const seed = document.getElementById('seed-input').value;
+            const intensity = parseInt(document.getElementById('intensity-slider').value);
+
+            // Проверка, что система готова к запуску
+            if (typeof generateRealityShard === 'function') {
+                const result = generateRealityShard(seed, intensity);
+
+                // Обновление DOM для пользователя
+                document.getElementById('shard-name').textContent = `[Осколок #${Math.floor(Math.random() * 999)}]`; 
+                document.getElementById('components-log').innerHTML = result.html;
+
+                console.log(`--- Генерация завершена ---`);
+                console.log("Индекс нестабильности:", result.instabilityScore);
+            } else {
+                 alert("ОШИБКА СИСТЕМЫ: Функция генерации не найдена! Проверьте, что generator.js и loader.js находятся в корне проекта.");
+            }
+        });
+
+    </script>
+
+</body>
+</html>
